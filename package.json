@@ -1,0 +1,35 @@
+{
+  "name": "black-out-solutions",
+  "version": "1.0.0",
+  "description": " selling alternative power solutions such as solar panels, generators, and related",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "odtmStart": "nodemon server.js",
+    "test": "jest --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Awsmchrlz/Black-Out-Solutions.git"
+  },
+  "author": "ambitiousohns",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Awsmchrlz/Black-Out-Solutions/issues"
+  },
+  "homepage": "https://github.com/Awsmchrlz/Black-Out-Solutions#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-rate-limit": "^7.3.1",
+    "express-session": "^1.18.0",
+    "mongoose": "^8.4.1"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.3"
+  }
+}
