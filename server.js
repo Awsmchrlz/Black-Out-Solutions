@@ -16,15 +16,15 @@ const authRoute = require('./routes/auth');
 
 
 // Database connection
-const localDB = "mongodb://127.0.0.1:27017/Blackout-solutions";
-mongoose.set('strictQuery', true);
+// const localDB = "mongodb://127.0.0.1:27017/Blackout-solutions";
+// mongoose.set('strictQuery', true);
 
-mongoose.connect(localDB, { useNewUrlParser: true })
+// mongoose.connect(localDB, { useNewUrlParser: true })
 
-  .then(() => {
-    console.log('Database is connected');
-  })
-.catch((err) => console.log('Error connecting to database ', err));
+//   .then(() => {
+//     console.log('Database is connected');
+//   })
+// .catch((err) => console.log('Error connecting to database ', err));
 
 
 // Configure the server
