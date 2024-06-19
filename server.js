@@ -11,8 +11,8 @@
 
 // Import routes
 const homeRoute = require('./routes/home');
-// const shopRoute = require('./routes/shop');
-// const authRoute = require('./routes/auth');
+const shopRoute = require('./routes/shop');
+const authRoute = require('./routes/auth');
 
 
 // Database connection
@@ -40,8 +40,8 @@ app.use(express.urlencoded({ extended: false }));
 
 // Use routes
 app.use('/', homeRoute);
-// app.use('/shop', shopRoute)
-// app.use('/auth', authRoute)
+app.use('/shop', shopRoute)
+app.use('/auth', authRoute)
 // app.use('/transact',ensureAuthenticated ,transactRouter);
 
 app.use('*', (req, res) => {
