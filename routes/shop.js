@@ -3,9 +3,10 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const app = express();
+const { ensureAuthenticated } = require('../config/auth');
 
 
-router.get("/", (req, res) => {
+router.get("/", ensureAuthenticated,(req, res) => {
     res.render("shop/shop");
 });
 
