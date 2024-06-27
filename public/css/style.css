@@ -8625,7 +8625,7 @@ h1, h2, h3, h4, h5,
           position: relative; }
         .owl-carousel.home-slider .slider-item .slider-text h1 {
           font-size: 44px;
-          color: #000000;
+          color: #fff;
           line-height: 1.3;
           font-weight: 300;
           text-transform: uppercase; }
@@ -8643,11 +8643,11 @@ h1, h2, h3, h4, h5,
           font-weight: 400; }
           @media (max-width: 991.98px) {
             .owl-carousel.home-slider .slider-item .slider-text p {
-              color: rgba(255, 255, 255, 0.7);
+              color: #fff;
               font-size: 23px; } }
         .owl-carousel.home-slider .slider-item .slider-text .btn-custom {
-          color: #fff;
-          background: #c2a942;
+          color: #000000;
+          background: #fff;
           padding: 10px 20px; }
     .owl-carousel.home-slider .owl-nav {
       position: absolute;
@@ -8774,9 +8774,9 @@ h1, h2, h3, h4, h5,
         background: #000000;
         color: #fff; }
   .btn.btn-black {
-    background: #000000;
+    background: #fff;
     border: 1px solid #000000;
-    color: #fff; }
+    color: #000000; }
     .btn.btn-black:hover {
       background: #000000;
       border: 1px solid #000000;
@@ -8878,7 +8878,7 @@ h1, h2, h3, h4, h5,
       transition: all 0.3s ease; }
     .product .img-prod span.status {
       padding: 10px 1px;
-      color: #000000;
+      color: #fff;
       font-weight: 400;
       background: #000000;
       -webkit-writing-mode: vertical-lr;
@@ -9293,7 +9293,7 @@ h1, h2, h3, h4, h5,
     .table tbody tr td.product-remove a {
       background: #000000;
       padding: 4px 10px;
-      color: #000000;
+      color: #fff;
       -webkit-border-radius: 2px;
       -moz-border-radius: 2px;
       -ms-border-radius: 2px;
@@ -10666,3 +10666,8 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+
+.breadcrumbs{
+  color: #000000 !important;
+}
