@@ -1,7 +1,11 @@
 // require("dotenv").config();
 var SibApiV3Sdk = require("sib-api-v3-sdk");
-var defaultClient = SibApiV3Sdk.ApiClient.instance;gi
+var defaultClient = SibApiV3Sdk.ApiClient.instance;
 
+var apiKey = defaultClient.authentications["api-key"];
+apiKey.apiKey = "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";
+
+//apiKey.apiKey =   	proccess.env.BREVO_EMAIL_API;
 
 var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
@@ -79,7 +83,7 @@ const sendEmail = (
         {
           to: [
             {
-              email: "subilosichembe180@gmail.com", // Add the email address
+             
               name: "Blackout Energy Solutions",
             },
           ],
@@ -174,7 +178,7 @@ const generateUserTransactionRequestHTML = (
     margin-right: 5px;
   `;
 
-  //kawazalawson08@gmail.com
+  
   return `
     <div style="${containerStyle}">
         <h1 style="${headingStyle}">📊 Transaction Request</h1>

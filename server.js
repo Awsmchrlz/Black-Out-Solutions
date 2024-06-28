@@ -15,15 +15,16 @@ require('dotenv').config();
 const homeRoute = require('./routes/home');
 const shopRoute = require('./routes/shop');
 const authRoute = require('./routes/auth');
-// const { ensureAuthenticated} = require('./config/auth');
+const { ensureAuthenticated} = require('./config/auth');
 
 // Initialize Passport
 require('./config/passport')(passport);
-
+const uri = "mongodb+srv://odtm00:XbmlznY0lWudnOjr@cluster0.9kdlfk4.mongodb.net/?appName=Cluster0";
+const localDb = "mongodb://127.0.0.1:27017/blackout"
 // Database connection
-const dbURI = process.env.DB_URI || "mongodb://127.0.0.1:27017/blackout";
+
 mongoose.set('strictQuery', true);
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Database is connected'))
   .catch(err => console.log('Error connecting to database', err));
 
@@ -38,7 +39,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Session and authentication setup
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'mysecret',
+  secret: 'mysecret',
   resave: false,
   saveUninitialized: false
 }));
@@ -46,10 +47,14 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res, next) => {
+  res.locals.message = req.flash('error');
+ next();
+});
 // Use routes
-app.use('/', homeRoute);
-app.use('/shop', shopRoute);
 app.use('/auth', authRoute);
+app.use('/', homeRoute);
+app.use('/shop', ensureAuthenticated,shopRoute);
 
 app.use('*', (req, res) => {
   res.redirect('/'); // Redirect to the main page or any desired page

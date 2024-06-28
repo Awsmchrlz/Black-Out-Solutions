@@ -51,19 +51,24 @@
                     <form action="/auth/login" onsubmit="return validateLoginForm()" method="post" class="cart-detail bg-light p-3 p-md-4">
                          
                         <h3 class="billing-heading mb-4">Sign in</h3>
-                        <div id="errorDiv"></div>
+                        <div id="errorDiv">
+                            <% if (message) { %>
+                            <div><%=message%></div>
+                          <% }  %>
+                        </div>
                                   <div class="form-group">
                                     <label for="emailaddress">Email Address</label>
-                                    <input id="email" type="text" class="form-control" placeholder="">
+                                    <input name="email" id="email" type="text" class="form-control" placeholder="Enter Email Address">
                                   </div>
                                   <div class="form-group">
                                     <label for="emailaddress">Password</label>
-                                    <input id="password" type="password" class="form-control" placeholder="">
+                                    <input id="password" name="password" type="password" class="form-control" placeholder="Enter Your Password">
                                   </div>
                                  
                                   <p><button class="btn btn-primary py-3 px-4">Login</button></p>
                                   
-                                <p class="text-center">don't have an account?<a href="/auth/signup"class=" py-3 px-4">Signup instead</a></p>
+                                <p class="text-center">Don't have an account?<a href="/auth/signup"class=" py-3 px-4">Signup instead.</a></p>
+                                <p class="text-center">Reset Password<a href="/auth/resetPassword"class=" py-3 px-4">Click to reset password.</a></p>
                                 </form>
                 </div>
             </div>

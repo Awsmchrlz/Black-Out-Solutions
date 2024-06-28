@@ -7,19 +7,31 @@ const { ensureAuthenticated } = require('../config/auth');
 
 
 router.get("/", ensureAuthenticated,(req, res) => {
-    res.render("shop/shop");
+  const user = req.user
+    res.render("shop/shop",{
+        user
+    });
 });
 
 router.get("/item", (req, res) =>{
-   res.render("shop/item");
-})
+  const user = req.user
+   res.render("shop/item",{
+        user
+   });
+});
 
 router.get("/cart", (req, res) => {
-   res.render("shop/cart");
+  const user = req.user
+   res.render("shop/cart",{
+        user
+   });
 })
 
 router.get("/checkout", (req, res) => {
-   res.render("shop/checkout");
+  const user = req.user
+   res.render("shop/checkout",{
+        user
+   });
 })
 
 module.exports = router;
