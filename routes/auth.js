@@ -41,11 +41,11 @@ router.get("/", (req, res) => {
 });
 
 
-app.set('trust proxy', true);
+// app.set('trust proxy', true);
 
 // router.use('/use', limiter);
 
-router.post("/login", limiter, (req, res, next) => {
+router.post("/login", (req, res, next) => {
   passport.authenticate("local", {
     successRedirect: "/shop",
     failureRedirect: "/auth/login",
