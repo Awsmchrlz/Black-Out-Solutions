@@ -29,58 +29,54 @@
 </head>
 <body class="goto-here">
 
-  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-    <div class="container">
-        <a class="navbar-brand" href="/">Blackout-solutions</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="oi oi-menu"></span> Menu
-        </button>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="/">Blackout-solutions</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
 
-        <div class="collapse navbar-collapse" id="ftco-nav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="/shop" class="nav-link">Shop</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="/shop/cart">Cart</a>
-                        <a class="dropdown-item" href="/shop/checkout">Checkout</a>
-                    </div>
-                </li>
-                <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
-                <li class="nav-item cta cta-colored"><a href="/shop/cart" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-                <% if (!user) { %>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sign up</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown05">
-                        <a class="dropdown-item" href="/auth/login">Login</a>
-                        <a class="dropdown-item" href="/auth/signup">Create Account</a>
-                    </div>
-                </li>
-                <% } else { %>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown05">
-                        <a class="dropdown-item" href="/manageAccount">Manage Account</a>
-                        <a class="dropdown-item" href="/auth/updatePassword">Update Password</a>
-                        <a class="dropdown-item" href="/auth/logout">Logout</a>
-                    </div>
-                </li>
-                <% } %>
-            </ul>
-        </div>
-    </div>
-</nav>
-<script>
-  // Close dropdown on item click for mobile
-  $(document).ready(function() {
-      $('.navbar-collapse a').click(function() {
-          $('.navbar-collapse').collapse('hide');
-      });
-  });
-</script>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="/shop" class="nav-link">Shop</a></li>
+	          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+                <a class="dropdown-item" href="/shop/cart">Cart</a>
+                <a class="dropdown-item" href="/shop/checkout">Checkout</a>
+              </div>
+            </li>
+	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+	          <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+	          <li class="nav-item cta cta-colored"><a href="/shop/cart" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+          <%if(!user){%>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sign up</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown05">
+                <a class="dropdown-item" href="/auth/login">login</a>
+                <a class="dropdown-item" href="/auth/signup">create account</a>
+              </div>
+            </li>
+<%}else{%>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown05">
+                <a class="dropdown-item" href="/manageAccount">Manage Account</a>
+                <a class="dropdown-item" href="/auth/updatePassword">Update Password</a>
+                <a class="dropdown-item" href="/auth/logout">Logout</a>
+              </div>
+            </li>
+          <%}%>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+
     <%- body %>
+
+
+
     
     <footer class="ftco-footer ftco-section">
         <div class="container">

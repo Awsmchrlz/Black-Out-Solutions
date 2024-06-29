@@ -1,13 +1,19 @@
-// require("dotenv").config();
+require("dotenv").config();
 var SibApiV3Sdk = require("sib-api-v3-sdk");
 var defaultClient = SibApiV3Sdk.ApiClient.instance;
 
 var apiKey = defaultClient.authentications["api-key"];
-apiKey.apiKey = "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";
-
-//apiKey.apiKey =   	proccess.env.BREVO_EMAIL_API;
+const key = process.env.BREVO_EMAIL_API;
+apiKey.apiKey = key;
 
 var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+
+
+// Check if the API key is set properly
+if (!process.env.BREVO_EMAIL_API) {
+  console.error("API key is not defined");
+  process.exit(1);
+}
 
 const sendEmail = (
   email,
@@ -268,129 +274,127 @@ const generateAdminTransactionNotificationHTML = (
 
 function generateUserEmail(userName) {
   const emailHtml = `
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Rate Limit Exceeded</title>
-        <style>
-         body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: #fff;
-          }
-          .container {
-            background: #fff;
-            border: 1px solid #000;
-            padding: 40px;
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-          }
-          h1 {
-            color: #000;
-            font-size: 2em;
-            margin-bottom: 20px;
-          }
-          p {
-            color: #000;
-            font-size: 1.2em;
-            margin-bottom: 30px;
-          }
-          .button {
-            background: #000;
-            color: white;
-            border: 1px solid #000;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-          }
-          .button:hover {
-            background: #444;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <h1>Hello ${userName},</h1>
-          <p>Thank you for signing up with Blackout Energy Solutions.</p>
-           </div>
-      </body>
-      </html>
-      `;
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>New Account Created</title>
+      <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          margin: 0;
+          padding: 0;
+          background: #f4f4f4;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+        .container {
+          background: #ffffff;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          padding: 40px;
+          max-width: 450px;
+          text-align: center;
+          width: 90%;
+        }
+        h1 {
+          color: #333;
+          font-size: 1.8em;
+          margin-bottom: 20px;
+        }
+        p {
+          color: #555;
+          font-size: 1.1em;
+          margin-bottom: 30px;
+        }
+        .button {
+          background: #007BFF;
+          color: #ffffff;
+          border: none;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          font-size: 1em;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;
+          display: inline-block;
+        }
+        .button:hover {
+          background: #0056b3;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Hello ${userName},</h1>
+        <p>Thank you for signing up with Blackout Energy Solutions. We are thrilled to have you on board!</p>
+     </div>
+    </body>
+    </html>
+  `;
   return emailHtml;
 }
 
-function generateAdminEmail({userName, email}) {
+
+function generateAdminEmail({ userName, email }) {
   const emailHtml = `
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>New User</title>
-        <style>
-            body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: #fff;
-          }
-          .container {
-            background: #fff;
-            border: 1px solid #000;
-            padding: 40px;
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-          }
-          h1 {
-            color: #000;
-            font-size: 2em;
-            margin-bottom: 20px;
-          }
-          p {
-            color: #000;
-            font-size: 1.2em;
-            margin-bottom: 30px;
-          }
-          .button {
-            background: #000;
-            color: white;
-            border: 1px solid #000;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-          }
-          .button:hover {
-            background: #444;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <h1>New account created by ${userName}, Email <i>${email}</i></h1>
-        
-          </div>
-      </body>
-      </html>
-      `;
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>New User</title>
+      <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          margin: 0;
+          padding: 0;
+          background: #f4f4f4;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+        .container {
+          background: #ffffff;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          padding: 40px;
+          max-width: 450px;
+          text-align: center;
+          width: 90%;
+        }
+        h1 {
+          color: #333;
+          font-size: 1.8em;
+          margin-bottom: 20px;
+        }
+        p {
+          color: #555;
+          font-size: 1.1em;
+          margin-bottom: 30px;
+        }
+        .email {
+          color: #007BFF;
+          font-style: italic;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>New account created by ${userName}</h1>
+        <p>Email: <span class="email">${email}</span></p>
+      </div>
+    </body>
+    </html>
+  `;
   return emailHtml;
 }
+
+
 
 function sendAccountCreateEmail({email, userName}) {
   apiInstance

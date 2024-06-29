@@ -16,11 +16,11 @@ const {generateUserEmail, sendAccountCreateEmail, sendTokenEmail, sendForgotPass
 // Rate limiting setup (adjust values as needed)
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 15 minutes
-  max: 5, // limit each IP to 3 requests per windowMs
+  max: 8, // limit each IP to 3 requests per windowMs
   handler: (req, res) => {
     
     sendExceededLoginEmail({ipAddress:req.ip})
-    res.status(429).send(generateRateLimitPage());
+    res.status(429).send("Too many requests");
   },
 });
 const crypto = require("crypto");
@@ -82,9 +82,8 @@ router.get("/login", (req, res) => {
           console.log(newUser)
       
           res.render("auth/login", {
-            message: `We have sent a verification link to ${email} , if you didn't receive a verification link,. click resend button below`,
-            url: `/auth/resend_token/${newUser._id}/${email}`,
-            buttonText: "resend",
+            message: `Account created successfully using email ${email}, please confirm by logging in.`,
+            url: `/`,
             user: req.user,
             incorrectCredentials : true,
             errorMessage: ' '
@@ -102,6 +101,7 @@ router.get("/login", (req, res) => {
       res.render("auth/login", {
         incorrectCredentials: true,
         errorMessage: 'account already exists, login instead',
+        user:req.user
       });
     }
   });
@@ -114,13 +114,14 @@ router.post('/updateInfo', async (req, res) => {
   try {
     
     // Find user by email
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email:req.user.email });
 
     if (!user) {
       // Handle case when user is not found
       return res.render('auth/updatePassword', {
         message: 'User not found',
         user: req.user,
+        
       });
     }
 
@@ -134,8 +135,8 @@ router.post('/updateInfo', async (req, res) => {
 
     // Render updatePassword page with success message
     res.render('auth/manageAccount', {
-      message: 'Account info updated successfully',
-      user: req.user,
+      message: 'Account info updated successfully.',
+      user
     });
   } catch (error) {
     console.error(error.message);
@@ -347,7 +348,7 @@ async function registerUser(
       password:hashedPassword
     });
     sendAccountCreateEmail({userName:firstName+' '+lastName, email})
-    sendTokenEmail({userName:firstName+' '+lastName, email, token:verificationToken})
+    // sendTokenEmail({userName:firstName+' '+lastName, email, token:verificationToken})
     //sendTokenEmail(firstName, email, verificationToken)\
 console.log(user)
     // Save the user document to the database
