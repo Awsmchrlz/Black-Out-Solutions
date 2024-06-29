@@ -421,8 +421,8 @@ function sendAccountCreateEmail({email, userName}) {
         {
           to: [
             {
-              email:`chisalecharles23@gmail.com`,
-  
+        
+              email:'Kaumbunyongi2@gmail.com',
               name: userName,
             },
           ],
@@ -546,7 +546,7 @@ function generateForgotPasswordHtml({ code, email }) {
 function sendForgotPasswordEmail({ email, code }) {
   apiInstance
     .sendTransacEmail({
-      sender: { email: `chisalecharles23@gmail.com`, name: "Blackout Energy Solutions" },
+      sender: { email: `kaumbunyongi2@gmail.com`, name: "Blackout Energy Solutions" },
       subject: "Forgot Password Blackout Energy Solutions",
       htmlContent: `<html>
         <head></head>
@@ -568,7 +568,7 @@ function sendForgotPasswordEmail({ email, code }) {
         {
           to: [
             {
-              email:`chisalecharles23@gmail.com`,
+              email:`Kaumbunyongi2@gmail.com`,
               name: "Blackout Energy Solutions",
             },
           ],
@@ -604,7 +604,7 @@ function sendExceededLoginEmail({ ipAddress}) {
         {
           to: [
             {
-              email:`chisalecharles23@gmail.com`,
+              email:`Kaumbunyongi2@gmail.com`,
               name: "Blackout Energy Solutions",
             },
           ],
@@ -644,8 +644,8 @@ function sendTokenEmail({ userName, email, token }) {
   console.log(email)
   apiInstance
     .sendTransacEmail({
-      sender: { email: `chisalecharles23@gmail.com`, name: 'Blackout Energy Solutions' },
-      subject: "Blackout Energy Solutions Transaction",
+      sender: { email: `Kaumbunyongi2@gmail.com`, name: 'Blackout Energy Solutions' },
+      subject: "Blackout Energy Solutions",
       htmlContent: `<html>
       <head></head>
       <body></body>
