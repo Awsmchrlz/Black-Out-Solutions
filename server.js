@@ -19,12 +19,12 @@ const { ensureAuthenticated} = require('./config/auth');
 
 // Initialize Passport
 require('./config/passport')(passport);
-const uri = "mongodb+srv://odtm00:XbmlznY0lWudnOjr@cluster0.9kdlfk4.mongodb.net/?appName=Cluster0";
+const liveDb = "mongodb+srv://odtm00:XbmlznY0lWudnOjr@cluster0.9kdlfk4.mongodb.net/?appName=Cluster0";
 const localDb = "mongodb://127.0.0.1:27017/blackout"
 // Database connection
 
 mongoose.set('strictQuery', true);
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(liveDb, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Database is connected'))
   .catch(err => console.log('Error connecting to database', err));
 
