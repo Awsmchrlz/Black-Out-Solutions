@@ -6,16 +6,35 @@ const app = express();
 
 
 router.get("/", (req, res) => {
-    res.render("home/home");
+  // console.log(req.user)
+  const user = req.user
+    res.render("home/home",{
+        user
+    });
 });
 
+router.get("/manageAccount", (req, res) => {
+  const user = req.user
+  res.render("auth/manageAccount",{
+      layout: "layouts/non_header_layout",
+        user,
+        message:''
+  });
+})
 
 router.get("/about", (req, res) => {
-  res.render("home/about");
+
+const user = req.user;
+  res.render("home/about",{
+      user
+  });
 })
 
 router.get("/contact", (req, res) => {
-    res.render("home/contact");
+const user = req.user;
+    res.render("home/contact",{
+        user
+    });
 })
 
 module.exports = router;

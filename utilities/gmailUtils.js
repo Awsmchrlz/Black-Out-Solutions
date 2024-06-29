@@ -2,6 +2,10 @@
 var SibApiV3Sdk = require("sib-api-v3-sdk");
 var defaultClient = SibApiV3Sdk.ApiClient.instance;
 
+var apiKey = defaultClient.authentications["api-key"];
+apiKey.apiKey = "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";
+
+//apiKey.apiKey =   	proccess.env.BREVO_EMAIL_API;
 
 var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
@@ -57,6 +61,29 @@ const sendEmail = (
           to: [
             {
               email: "chisalecharles23@gmail.com", // Add the email address
+              name: "Blackout Energy Solutions",
+            },
+          ],
+          htmlContent: generateAdminTransactionNotificationHTML(
+            email,
+            firstName,
+            lastName,
+            amount,
+            phoneNumber,
+            currency,
+            recipientCountry,
+            recipientName,
+            recipientPhoneNumber,
+            accountInfo,
+            amountToSend,
+            currencyTo
+          ),
+          subject: "New Transaction! ~ Blackout Energy Solutions",
+        },
+        {
+          to: [
+            {
+             
               name: "Blackout Energy Solutions",
             },
           ],
@@ -151,7 +178,7 @@ const generateUserTransactionRequestHTML = (
     margin-right: 5px;
   `;
 
-  //kawazalawson08@gmail.com
+  
   return `
     <div style="${containerStyle}">
         <h1 style="${headingStyle}">📊 Transaction Request</h1>
