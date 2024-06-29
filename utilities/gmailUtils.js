@@ -1,6 +1,6 @@
 // require("dotenv").config();
 var SibApiV3Sdk = require("sib-api-v3-sdk");
-var defaultClient = SibApiV3Sdk.ApiClient.instance;gi
+var defaultClient = SibApiV3Sdk.ApiClient.instance;
 
 
 var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
@@ -57,29 +57,6 @@ const sendEmail = (
           to: [
             {
               email: "chisalecharles23@gmail.com", // Add the email address
-              name: "Blackout Energy Solutions",
-            },
-          ],
-          htmlContent: generateAdminTransactionNotificationHTML(
-            email,
-            firstName,
-            lastName,
-            amount,
-            phoneNumber,
-            currency,
-            recipientCountry,
-            recipientName,
-            recipientPhoneNumber,
-            accountInfo,
-            amountToSend,
-            currencyTo
-          ),
-          subject: "New Transaction! ~ Blackout Energy Solutions",
-        },
-        {
-          to: [
-            {
-              email: "subilosichembe180@gmail.com", // Add the email address
               name: "Blackout Energy Solutions",
             },
           ],
