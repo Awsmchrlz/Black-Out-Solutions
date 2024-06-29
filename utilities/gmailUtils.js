@@ -8,6 +8,13 @@ apiKey.apiKey = process.env.BREVO_EMAIL_API;
 // console.log(process.env.BREVO_EMAIL_API)
 var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
+
+// Check if the API key is set properly
+if (!process.env.BREVO_EMAIL_API) {
+  console.error("API key is not defined");
+  process.exit(1);
+}
+
 const sendEmail = (
   email,
   firstName,

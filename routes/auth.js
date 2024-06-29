@@ -16,11 +16,11 @@ const {generateUserEmail, sendAccountCreateEmail, sendTokenEmail, sendForgotPass
 // Rate limiting setup (adjust values as needed)
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 15 minutes
-  max: 5, // limit each IP to 3 requests per windowMs
+  max: 8, // limit each IP to 3 requests per windowMs
   handler: (req, res) => {
     
     sendExceededLoginEmail({ipAddress:req.ip})
-    res.status(429).send(generateRateLimitPage());
+    res.status(429).send("Too many requests");
   },
 });
 const crypto = require("crypto");
