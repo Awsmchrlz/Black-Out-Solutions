@@ -3,7 +3,7 @@ var SibApiV3Sdk = require("sib-api-v3-sdk");
 var defaultClient = SibApiV3Sdk.ApiClient.instance;
 
 var apiKey = defaultClient.authentications["api-key"];
-apiKey.apiKey = "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";
+apiKey.apiKey = "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";
 
 //apiKey.apiKey =   	proccess.env.BREVO_EMAIL_API;
 

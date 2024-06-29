@@ -112,6 +112,7 @@ router.post('/updateInfo', async (req, res) => {
   const { firstName, lastName, phoneNumber, email } = req.body;
 
   try {
+    
     // Find user by email
     const user = await User.findOne({ email });
 
@@ -345,7 +346,7 @@ async function registerUser(
       email,
       password:hashedPassword
     });
-    
+    sendAccountCreateEmail({userName:firstName+' '+lastName, email})
     sendTokenEmail({userName:firstName+' '+lastName, email, token:verificationToken})
     //sendTokenEmail(firstName, email, verificationToken)\
 console.log(user)
@@ -408,11 +409,11 @@ router.get("/verify/:token/:email", async (req, res) => {
       
       // console.log(`Username: ${user.firstName}, Password: ${user.password}`);
       return res.render("auth/login", {
-        message: `<p>🎉 Thank you for registering with Blackout-Energy-Solutions! 🎉</p>
+        message: `<p>🤝🎉Thank you for registering with Blackout-Energy-Solutions!🤝🎉</p>
       💼 <h3>Your account will be verified shortly</h3>
-      <p>We're here to make your transactions safe🔒, seamless🤝, and swift.<h3/>
+      <p>We're here to provide you solutions to blackouts🤝<h3/>
      `,
-        url: "/transact",
+        url: "/",
         buttonText: "proceed",
         user,
         incorrectCredentials : true,
