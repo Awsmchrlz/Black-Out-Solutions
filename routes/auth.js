@@ -114,13 +114,14 @@ router.post('/updateInfo', async (req, res) => {
   try {
     
     // Find user by email
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email:req.user.email });
 
     if (!user) {
       // Handle case when user is not found
       return res.render('auth/updatePassword', {
         message: 'User not found',
         user: req.user,
+        
       });
     }
 
