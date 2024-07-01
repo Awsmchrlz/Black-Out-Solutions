@@ -1,4 +1,5 @@
 // Import necessary modules
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
@@ -9,7 +10,6 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 
 // Load environment variables
-require('dotenv').config();
 
 // Import routes
 const homeRoute = require('./routes/home');
@@ -25,7 +25,7 @@ const localDb = "mongodb://127.0.0.1:27017/blackout"
 
 
 mongoose.set('strictQuery', true);
-mongoose.connect(process.env.liveDb, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(localDb, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Database is connected'))
   .catch(err => console.log('Error connecting to database', err));
 

@@ -8152,7 +8152,8 @@ a {
   color: #000000; }
   a:hover, a:focus {
     text-decoration: none;
-    color: #000000; }
+    color: var(--blue) !important; 
+  }
 
 h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {
@@ -8244,7 +8245,7 @@ h1, h2, h3, h4, h5,
       color: #fff; }
       .ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu .dropdown-item:hover, .ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu .dropdown-item:focus {
         background: transparent;
-        color: #000000; }
+        color: var(--blue); }
   .ftco-navbar-light .navbar-nav > .nav-item.ftco-seperator {
     position: relative;
     margin-left: 20px;
@@ -8324,7 +8325,7 @@ h1, h2, h3, h4, h5,
         color: #000000; }
         .ftco-navbar-light.scrolled .nav-item .dropdown-menu .dropdown-item:hover, .ftco-navbar-light.scrolled .nav-item .dropdown-menu .dropdown-item:focus {
           background: transparent;
-          color: #000000; }
+          color: var(--blue); }
       @media (max-width: 991.98px) {
         .ftco-navbar-light.scrolled .nav-item .dropdown-menu {
           -webkit-box-shadow: none;
@@ -10670,4 +10671,29 @@ textarea.form-control {
 
 .breadcrumbs{
   color: #000000 !important;
+}
+
+.user-profile span{
+	color: #000;
+	font-size: 5.5x;
+	display: inline-block;
+	width: 40px; /* Set the desired width for the circle */
+	height: 40px; /* Set the desired height for the circle */
+	background-color: var(--blue);
+	border-radius: 50%; /* Makes it a circle */
+	text-align: center;
+	/* line-height: 40px; Vertically centers the initials */
+	color: white; /* Text color inside the circle */
+	font-size: 20px; /* Adjust the font size as needed */
+	text-decoration: none; /* Removes the underline */
+	text-transform: uppercase;
+  }
+
+.navbar-brand .sidebar-logo img{
+    height: 60px;
+    /* width: 40px; */
+}
+
+.nav-item.active{
+   color: var(--blue);
 }
