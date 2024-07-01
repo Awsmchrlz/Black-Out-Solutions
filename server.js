@@ -25,7 +25,7 @@ const localDb = "mongodb://127.0.0.1:27017/blackout"
 
 
 mongoose.set('strictQuery', true);
-mongoose.connect(localDb, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.liveDb, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Database is connected'))
   .catch(err => console.log('Error connecting to database', err));
 
@@ -68,5 +68,5 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 3911;
+const PORT = process.env.PORT || 3912;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
