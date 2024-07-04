@@ -1,4 +1,4 @@
-/*!
+/*
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.
@@ -8839,7 +8839,9 @@ h1, h2, h3, h4, h5,
   -o-transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
-  transition: all 0.3s ease; }
+  transition: all 0.3s ease; 
+  height: fit-content;
+}
   @media (max-width: 991.98px) {
     .product {
       margin-bottom: 30px; } }
@@ -8851,7 +8853,8 @@ h1, h2, h3, h4, h5,
     -moz-box-shadow: inset 0px 0px 101px 21px rgba(0, 0, 0, 0.09);
     box-shadow: inset 0px 0px 101px 21px rgba(0, 0, 0, 0.09);
     background: #fff;
-    z-index: 1; }
+    z-index: 1; 
+  }
     .product .img-prod .overlay {
       position: absolute;
       top: 50%;
@@ -8909,7 +8912,10 @@ h1, h2, h3, h4, h5,
       -o-transition: all 1s ease;
       -webkit-transition: all 1s ease;
       -ms-transition: all 1s ease;
-      transition: all 1s ease; }
+      transition: all 1s ease; 
+      height: block;
+    }
+      
   .product .img {
     display: block;
     height: 500px; }

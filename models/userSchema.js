@@ -29,7 +29,12 @@ const userSchema = new mongoose.Schema({
   type:String,
   required:false,
   default:"null"
- }
+ },
+  createdAt:{
+    type: Date,
+    required: true,
+    default: Date.now
+ },
 });
 
 
