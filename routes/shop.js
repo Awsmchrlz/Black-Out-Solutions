@@ -15,6 +15,7 @@ router.get("/", ensureAuthenticated,(req, res) => {
 
 
 router.get("/item", (req, res) =>{
+
   const user = req.user
    res.render("shop/item",{
         user
