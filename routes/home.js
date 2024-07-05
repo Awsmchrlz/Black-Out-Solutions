@@ -3,13 +3,18 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const app = express();
+const Product = require('../models/uploadSchema'); 
 
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   // console.log(req.user)
+
+  const products = await Product.find({});
+  
   const user = req.user
     res.render("home/home",{
-        user
+        user,
+        products
     });
 });
 

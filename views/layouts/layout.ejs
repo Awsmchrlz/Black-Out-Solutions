@@ -31,7 +31,11 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="/">Blackout-solutions</a>
+	      <a class="navbar-brand" href="/">
+          <div class="sidebar-logo">
+            <img src="/images/blackoutLogo.png" alt="icon">
+        </div>
+        </a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -60,7 +64,7 @@
             </li>
 <%}else{%>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
+              <a class="nav-link dropdown-toggle user-profile" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span><%= user.firstName.charAt(0) + user.lastName.charAt(0) %></span></a></a>
               <div class="dropdown-menu" aria-labelledby="dropdown05">
                 <a class="dropdown-item" href="/manageAccount">Manage Account</a>
                 <a class="dropdown-item" href="/auth/updatePassword">Update Password</a>

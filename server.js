@@ -1,4 +1,5 @@
 // Import necessary modules
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
@@ -9,13 +10,12 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 
 // Load environment variables
-require('dotenv').config();
 
 // Import routes
 const homeRoute = require('./routes/home');
 const shopRoute = require('./routes/shop');
 const authRoute = require('./routes/auth');
-const { ensureAuthenticated} = require('./config/auth');
+const { ensureAuthenticated } = require('./config/auth');
 
 // Initialize Passport
 require('./config/passport')(passport);
@@ -25,7 +25,7 @@ const localDb = "mongodb://127.0.0.1:27017/blackout"
 
 
 mongoose.set('strictQuery', true);
-mongoose.connect(process.env.liveDb, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(localDb, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Database is connected'))
   .catch(err => console.log('Error connecting to database', err));
 
@@ -55,7 +55,8 @@ app.use((req, res, next) => {
 // Use routes
 app.use('/auth', authRoute);
 app.use('/', homeRoute);
-app.use('/shop', ensureAuthenticated,shopRoute);
+// app.use('/shop', ensureAuthenticated,shopRoute);
+app.use('/shop', shopRoute);
 
 app.use('*', (req, res) => {
   res.redirect('/'); // Redirect to the main page or any desired page
@@ -68,5 +69,5 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 3911;
+const PORT = process.env.PORT || 3912;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
