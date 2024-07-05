@@ -24,7 +24,7 @@ const sendEmail = (
   currency,
   recipientCountry,
   recipientName,
-  recipientPhoneNumber,
+recipientPhoneNumber,
   accountInfo,
   amountToSend,
   currencyTo
