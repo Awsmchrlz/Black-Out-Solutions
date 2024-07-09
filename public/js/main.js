@@ -294,7 +294,17 @@
     fixedContentPos: false
   });
 
+  var scrollToTop = function(){
+	  $('.scrollToTop').on('click', function(e){
+			$('html,body').animate({
+				scrollTop: $('.goto-here').offset().top
+			}, 500, 'easeInOutExpo');
+			
+			// return false;
+	  })
+  }
 
+  scrollToTop();
 
 	var goHere = function() {
 

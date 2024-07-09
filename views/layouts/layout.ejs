@@ -127,7 +127,9 @@
 height: fit-content;
 position: relative;
 display: flex;
-margin-top: 55px;
+margin-top: 85px;
+margin-bottom: 20px;
+z-index: 1000;
 }
 
 .form .fa-search{
@@ -170,6 +172,21 @@ border-radius: 10px;
 box-shadow: none;
 border:none;
 }
+
+ #searchBar{
+    margin-left: 15%;
+    display: flex;
+    flex-direction: row;
+ }
+ #searchBar:hover{
+   color: #0056b3;
+ }
+ #searchBar .fa-search{
+     font-size: 150%;
+     font-weight: bolder;
+     font-stretch: expanded;
+     color: #0056b3;
+ }
     </style>
 </head>
 <body class="goto-here">
@@ -181,11 +198,13 @@ border:none;
             <img src="/images/blackoutLogo.png" alt="icon">
         </div>
         </a>
+        <!-- <a href="">Search</a> -->
+        <span id="searchBar" type="button" class="scrollToTop" data-toggle="collapse" data-target="#search-bar" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-search"></i><i>Search</i></span>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
-	      <div class="collapse navbar-collapse" id="ftco-nav">
+	      <div class="container collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/shop" class="nav-link">Shop</a></li>
@@ -221,8 +240,8 @@ border:none;
 	      </div>
 	    </div>
 	  </nav>
-<br>
-    <div class="container">
+<!-- <br> -->
+    <div class="container collapse navbar-collapse" id="search-bar">
 
       <div class="row height d-flex justify-content-center align-items-center">
 
@@ -240,7 +259,7 @@ border:none;
       
     </div>
 
-    <br>
+    <!-- <br> -->
 
    <!-- Filter Sidebar -->
    <div id="filterSidebar" class="filter-sidebar bg-light p-4">
