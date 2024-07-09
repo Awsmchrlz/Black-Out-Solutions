@@ -47,6 +47,108 @@ router.get("/checkout", (req, res) => {
    res.render("shop/checkout",{
         user
    });
-})
+});
+
+router.get('/filter', async (req, res) => {
+  try {
+    const { productName, productCompanyName, minPrice, maxPrice, productDescription } = req.query;
+    const user = req.user;
+
+    // Create an array to hold our search conditions
+    const searchConditions = [];
+
+    // Add conditions for each non-empty query parameter
+    if (productName) searchConditions.push({ productName: { $regex: productName, $options: 'i' } });
+    if (productCompanyName) searchConditions.push({ productCompanyName: { $regex: productCompanyName, $options: 'i' } });
+    if (productDescription) searchConditions.push({ productDescription: { $regex: productDescription, $options: 'i' } });
+
+    // Create the aggregation pipeline
+    const pipeline = [
+      {
+        $match: {
+          $or: searchConditions.length > 0 ? searchConditions : [{}], // If no conditions, match all documents
+        }
+      },
+      {
+        $addFields: {
+          score: {
+            $sum: [
+              { $cond: [{ $regexMatch: { input: "$productName", regex: productName || "", options: "i" } }, 1, 0] },
+              { $cond: [{ $regexMatch: { input: "$productCompanyName", regex: productCompanyName || "", options: "i" } }, 1, 0] },
+              { $cond: [{ $regexMatch: { input: "$productDescription", regex: productDescription || "", options: "i" } }, 1, 0] }
+            ]
+          }
+        }
+      }
+    ];
+
+    // Add price filtering if provided
+    if (minPrice || maxPrice) {
+      pipeline.push({
+        $match: {
+          $and: [
+            minPrice ? { productPrice: { $gte: parseInt(minPrice) } } : {},
+            maxPrice ? { productPrice: { $lte: parseInt(maxPrice) } } : {}
+          ]
+        }
+      });
+    }
+
+    // Add sorting
+    pipeline.push({
+      $sort: { score: -1, productName: 1 } // Sort by score descending, then by product name
+    });
+
+    const products = await Product.aggregate(pipeline);
+
+    res.render('shop/searchResults', { products, user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred while filtering products');
+  }
+});
+
+
+router.post('/search', async (req, res) => {
+  try {
+    const searchText = req.body.searchText;
+    const user = req.user; // Assuming you're using authentication
+
+    if (!searchText) {
+      return res.render('shop/searchResults', { products: [], user, searchPerformed: false });
+    }
+
+    const searchRegex = new RegExp(searchText, 'i');
+
+    const products = await Product.aggregate([
+      {
+        $match: {
+          $or: [
+            { productName: { $regex: searchRegex } },
+            { productCompanyName: { $regex: searchRegex } }
+          ]
+        }
+      },
+      {
+        $addFields: {
+          score: {
+            $add: [
+              { $cond: [{ $regexMatch: { input: "$productName", regex: searchRegex } }, 2, 0] },
+              { $cond: [{ $regexMatch: { input: "$productCompanyName", regex: searchRegex } }, 1, 0] }
+            ]
+          }
+        }
+      },
+      {
+        $sort: { score: -1, productName: 1 }
+      }
+    ]);
+
+    res.render('shop/searchResults', { products, user, searchPerformed: true, searchText });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred while searching for products');
+  }
+});
 
 module.exports = router;

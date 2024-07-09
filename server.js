@@ -23,9 +23,9 @@ require('./config/passport')(passport);
 const localDb = "mongodb://127.0.0.1:27017/blackout"
 // Database connection
 
-
+// process.env.
 mongoose.set('strictQuery', true);
-mongoose.connect(process.env.liveDb, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(localDb, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Database is connected'))
   .catch(err => console.log('Error connecting to database', err));
 
@@ -44,6 +44,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+
+
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());

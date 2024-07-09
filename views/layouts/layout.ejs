@@ -26,6 +26,151 @@
     <link rel="stylesheet" href="/css/flaticon.css">
     <link rel="stylesheet" href="/css/icomoon.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+           .search-bar {
+            width: 100%;
+            max-width: 400px;
+            margin: 10px auto;
+            position: relative;
+        }
+        .search-bar .input-group {
+            display: flex;
+            align-items: center;
+            border: 2px solid #000;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 10px 20px;
+            border: none;
+            font-size: 16px;
+            outline: none;
+        }
+        .search-bar button {
+            background-color: #000000;
+            border: none;
+            color: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+        .filter-button {
+            margin-top: 10px;
+            display: block;
+            width: fit-content;
+        }
+        .filter-button i {
+            margin-right: 5px;
+        }
+        .filter-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 300px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 1050;
+            padding: 20px;
+        }
+        .filter-sidebar.show {
+            transform: translateX(0);
+        }
+        .filter-sidebar .form-group {
+            margin-bottom: 1rem;
+        }
+        .filter-sidebar select,
+        .filter-sidebar input {
+            display: block;
+            width: 100%;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+        .filter-sidebar button {
+            width: 100%;
+        }
+        .filter-sidebar select {
+            background-color: #f8f9fa;
+            color: #495057;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+        .filter-sidebar select:focus {
+            background-color: #fff;
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+        }
+
+
+        
+.form{
+height: fit-content;
+position: relative;
+display: flex;
+margin-top: 55px;
+}
+
+.form .fa-search{
+
+/* position: absolute; */
+top:20px;
+left: 20px;
+color: #9ca3af;
+
+}
+
+.form span{
+
+    position: absolute;
+right: 17px;
+top: 13px;
+padding: 2px;
+border-left: 1px solid #d1d5db;
+
+}
+
+.left-pan{
+padding-left: 7px;
+}
+
+.left-pan i{
+
+padding-left: 10px;
+}
+
+.form-input{
+
+height: 55px;
+text-indent: 33px;
+border-radius: 10px;
+}
+
+.form-input:focus{
+
+box-shadow: none;
+border:none;
+}
+    </style>
 </head>
 <body class="goto-here">
 
@@ -47,7 +192,7 @@
 	          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item" href="/shop/cart">Cart</a>
+                <a class="dropdown-item" href="/shzop/cart">Cart</a>
                 <a class="dropdown-item" href="/shop/checkout">Checkout</a>
               </div>
             </li>
@@ -76,13 +221,70 @@
 	      </div>
 	    </div>
 	  </nav>
+<br>
+    <div class="container">
 
-    
-    <%- body %>
+      <div class="row height d-flex justify-content-center align-items-center">
+
+        <div class="col-md-6">
+
+          <form class="form" action="/shop/search" method="POST" onsubmit="return validateSearch()">
+            <i class="fa fa-search"></i>
+            <input type="text" id="searchInput" name="searchText" class="form-control form-input" placeholder="Search anything...">
+            <span id="filterButton" class="left-pan"><i class="fa fa-sliders"></i></span>
+          </form>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+
+    <br>
+
+   <!-- Filter Sidebar -->
+   <div id="filterSidebar" class="filter-sidebar bg-light p-4">
+    <h4 class="mb-4">Filter Products</h4>
+    <form class="filter-form" action="/shop/filter" method="GET">
+        <div class="mb-3">
+            <label for="productName" class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="productName" name="productName" placeholder="Enter product name">
+        </div>
+        
+        <div class="mb-3">
+            <label for="productCompanyName" class="form-label">Company Name</label>
+            <input type="text" class="form-control" id="productCompanyName" name="productCompanyName" placeholder="Enter company name">
+        </div>
+     
+        
+        <div class="mb-2">
+            <label class="form-label">Price Range (K)</label>
+            <div class="row g-2">
+                <div class="col-6">
+                    <input type="number" class="form-control" id="minPrice" name="minPrice" min="0" placeholder="Min">
+                </div>
+                <div class="col-6">
+                    <input type="number" class="form-control" id="maxPrice" name="maxPrice" min="0" placeholder="Max">
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-2">
+            <label for="productDescription" class="form-label">Description Keywords</label>
+            <input type="text" class="form-control" id="productDescription" name="productDescription" placeholder="Enter keywords">
+        </div>
+        
+      
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Apply Filters</button>
+            <button type="reset" class="btn btn-outline-secondary mt-2">Reset Filters</button>
+        </div>
+    </form>
+    <button id="closeFilterButton" class="btn btn-link text-secondary mt-3 d-block mx-auto">Close Filters</button>
+</div>
 
 
-
-    
+    <%- body %>    
     <footer class="ftco-footer ftco-section">
         <div class="container">
             <div class="row">
@@ -159,7 +361,24 @@
       
 
       <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
+      <script>
+        document.getElementById('filterButton').addEventListener('click', function() {
+            document.getElementById('filterSidebar').classList.add('show');
+        });
+    
+        document.getElementById('closeFilterButton').addEventListener('click', function() {
+            document.getElementById('filterSidebar').classList.remove('show');
+        });
+    
+        function validateSearch() {
+            var searchInput = document.getElementById('searchInput').value;
+            if (searchInput.trim() === '') {
+                alert('Please enter a search term.');
+                return false;
+            }
+            return true;
+        }
+    </script>
 
   <script src="/js/jquery.min.js"></script>
   <script src="/js/jquery-migrate-3.0.1.min.js"></script>
@@ -177,5 +396,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="/js/google-map.js"></script>
   <script src="/js/main.js"></script>
+
 </body>
 </html>
