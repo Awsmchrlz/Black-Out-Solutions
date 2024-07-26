@@ -154,31 +154,32 @@ router.post('/search', async (req, res) => {
 });
 
 // Checkout route
-
 router.post('/checkout', async (req, res) => {
   try {
-      const cart = JSON.parse(req.body.cartData);
-      console.log(cart)
-      const paymentMethod = req.body.paymentMethod;
-      const cartTotal = 40;
+    const cart = JSON.parse(req.body.cartData);
+    const paymentMethod = req.body.paymentMethod;
 
-      const newOrder = new Order({
-          user: req.user._id,
-          items: cart,
-          paymentMethod: paymentMethod,
-          total: cartTotal,
-          status: 'Pending',
-          orderDate: new Date()
-      });
+    // Calculate the total
+    const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
-      await newOrder.save();
+    const newOrder = new Order({
+      user: req.user._id,
+      items: cart,
+      paymentMethod: paymentMethod,
+      total: cartTotal,
+      status: 'Pending',
+      orderDate: new Date()
+    });
 
-      res.redirect('/shop/orders');
+    await newOrder.save();
+
+    res.redirect('/shop/orders');
   } catch (err) {
-      console.error(err);
-      res.redirect('/shop/checkout');
+    console.error(err);
+    res.redirect('/shop/checkout');
   }
 });
+
 
 // View user orders
 router.get('/orders', async (req, res) => {
