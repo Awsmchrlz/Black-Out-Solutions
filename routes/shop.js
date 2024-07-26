@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const app = express();
+const Order = require('../models/orderSchema.js');
+
 const { ensureAuthenticated } = require('../config/auth');
 
 const Product = require('../models/uploadSchema'); 
@@ -148,6 +150,44 @@ router.post('/search', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send('An error occurred while searching for products');
+  }
+});
+
+// Checkout route
+
+router.post('/checkout', async (req, res) => {
+  try {
+      const cart = JSON.parse(req.body.cartData);
+      console.log(cart)
+      const paymentMethod = req.body.paymentMethod;
+      const cartTotal = 40;
+
+      const newOrder = new Order({
+          user: req.user._id,
+          items: cart,
+          paymentMethod: paymentMethod,
+          total: cartTotal,
+          status: 'Pending',
+          orderDate: new Date()
+      });
+
+      await newOrder.save();
+
+      res.redirect('/shop/orders');
+  } catch (err) {
+      console.error(err);
+      res.redirect('/shop/checkout');
+  }
+});
+
+// View user orders
+router.get('/orders', async (req, res) => {
+  try {
+      const orders = await Order.find({ user: req.user._id }).populate('user');
+      res.render('shop/myOrders', { orders: orders,user:req.user });
+  } catch (err) {
+      console.error(err);
+      res.redirect('/');
   }
 });
 

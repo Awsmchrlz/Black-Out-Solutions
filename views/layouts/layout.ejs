@@ -174,9 +174,12 @@ border:none;
 }
 
  #searchBar{
-    margin-left: 15%;
+    /* margin-left: 15%; */
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
  }
  #searchBar:hover{
    color: #0056b3;
@@ -199,7 +202,11 @@ border:none;
         </div>
         </a>
         <!-- <a href="">Search</a> -->
-        <span id="searchBar" type="button" class="scrollToTop" data-toggle="collapse" data-target="#search-bar" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-search"></i><i>Search</i></span>
+        <span id="searchBar" type="button" class="scrollToTop" data-toggle="collapse" data-target="#search-bar" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <!-- <i class="fa fa-search"></i> -->
+          <i>Search</i>
+        </span>
+        
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -227,9 +234,12 @@ border:none;
               </div>
             </li>
 <%}else{%>
+  <li class="nav-item"><a href="/shop/orders" class="nav-link">My Orders</a></li>
+	      
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle user-profile" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span><%= user.firstName.charAt(0) + user.lastName.charAt(0) %></span></a></a>
               <div class="dropdown-menu" aria-labelledby="dropdown05">
+               
                 <a class="dropdown-item" href="/manageAccount">Manage Account</a>
                 <a class="dropdown-item" href="/auth/updatePassword">Update Password</a>
                 <a class="dropdown-item" href="/auth/logout">Logout</a>
@@ -415,6 +425,6 @@ border:none;
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="/js/google-map.js"></script>
   <script src="/js/main.js"></script>
-
+    <script src="/js/cartFunctionality.js"></script>
 </body>
 </html>

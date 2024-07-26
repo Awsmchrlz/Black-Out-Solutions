@@ -1,103 +1,123 @@
-
 <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_6.jpg');">
-    <div class="container">
-      <div class="row no-gutters slider-text align-items-center justify-content-center">
-        <div class="col-md-9 ftco-animate text-center">
-            <p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span> <span>Cart</span></p>
-          <h1 class="mb-0 bread">My Wishlist</h1>
-        </div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-center justify-content-center">
+      <div class="col-md-9 ftco-animate text-center">
+          <p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span> <span>Cart</span></p>
+        <h1 class="mb-0 bread">My Cart</h1>
       </div>
     </div>
   </div>
+</div>
 
-  <section class="ftco-section ftco-cart">
-          <div class="container">
-              <div class="row">
-              <div class="col-md-12 ftco-animate">
-                  <div class="cart-list">
-                      <table class="table">
-                          <thead class="thead-primary">
-                            <tr class="text-center">
-                              <th>&nbsp;</th>
-                              <th>&nbsp;</th>
-                              <th>Product</th>
-                              <th>Price</th>
-                              <th>Quantity</th>
-                              <th>Total</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr class="text-center">
-                              <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-                              
-                              <td class="image-prod"><div class="img" style="background-image:url(/images/product-13.png);"></div></td>
-                              
-                              <td class="product-name">
-                                  <h3>Lorem, ipsum dolor.</h3>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                              </td>
-                              
-                              <td class="price">$4.90</td>
-                              
-                              <td class="quantity">
-                                  <div class="input-group mb-3">
-                                   <input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-                                </div>
-                            </td>
-                              
-                              <td class="total">$4.90</td>
-                            </tr><!-- END TR-->
-
-                            <tr class="text-center">
-                              <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-                              
-                              <td class="image-prod"><div class="img" style="background-image:url(/images/product-14.png);"></div></td>
-                              
-                              <td class="product-name">
-                                  <h3>Lorem, ipsum dolor.</h3>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                              </td>
-                              
-                              <td class="price">$15.70</td>
-                              
-                              <td class="quantity">
-                                  <div class="input-group mb-3">
-                                   <input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-                                </div>
-                            </td>
-                              
-                              <td class="total">$15.70</td>
-                            </tr><!-- END TR-->
-                          </tbody>
-                        </table>
-                    </div>
-              </div>
-          </div>
-          <div class="row justify-content-start">
-              <div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
-                  <div class="cart-total mb-3">
-                      <h3>Cart Totals</h3>
-                      <p class="d-flex">
-                          <span>Subtotal</span>
-                          <span>$20.60</span>
-                      </p>
-                      <p class="d-flex">
-                          <span>Delivery</span>
-                          <span>$0.00</span>
-                      </p>
-                      <p class="d-flex">
-                          <span>Discount</span>
-                          <span>$3.00</span>
-                      </p>
-                      <hr>
-                      <p class="d-flex total-price">
-                          <span>Total</span>
-                          <span>$17.60</span>
-                      </p>
+<section class="ftco-section ftco-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ftco-animate">
+                <div class="cart-list">
+                    <table class="table">
+                        <thead class="thead-primary">
+                          <tr class="text-center">
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                          </tr>
+                        </thead>
+                        <tbody id="cartItems">
+                          <!-- Cart items will be dynamically added here -->
+                        </tbody>
+                      </table>
                   </div>
-                  <p class="text-center"><a href="/shop/checkout" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
-              </div>
-          </div>
-          </div>
-      </section>
+            </div>
+        </div>
+        <div class="row justify-content-start">
+            <div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
+                <div class="cart-total mb-3">
+                    <h3>Cart Totals</h3>
+                    <p class="d-flex">
+                        <span>Subtotal</span>
+                        <span id="cartSubtotal">K0.00</span>
+                    </p>
+                    <p class="d-flex">
+                        <span>Delivery</span>
+                        <span id="deliveryCharge">K0.00</span>
+                    </p>
+                   
+                    <hr>
+                    <p class="d-flex total-price">
+                        <span>Total</span>
+                        <span id="cartTotal">K0.00</span>
+                    </p>
+                </div>
+                <p class="text-center"><a href="/shop/checkout" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const cartItemsContainer = document.getElementById('cartItems');
+    const cartSubtotal = document.getElementById('cartSubtotal');
+    const deliveryChargeElem = document.getElementById('deliveryCharge');
+   const cartTotal = document.getElementById('cartTotal');
+    
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let subtotal = 0;
+    const deliveryCharge = 5.00; // Example delivery charge
+    
+    cartItemsContainer.innerHTML = '';
+
+    cart.forEach(item => {
+      const total = parseFloat(item.price.replace('K ', '')) * item.quantity;
+      subtotal += total;
+
+      const row = document.createElement('tr');
+      row.className = 'text-center';
+      row.innerHTML = `
+        <td class="product-remove"><a href="#" onclick="removeFromCart('${item.id}')"><span class="ion-ios-close"></span></a></td>
+        <td class="image-prod"><a href="/shop/item/${item.id}"><div class="img" style="background-image:url(${item.image});"></div></a></td>
+        <td class="product-name">
+            <a href="/shop/item/${item.id}"><h3>${item.name}</h3></a>
+            <p>${item.description}</p>
+        </td>
+        <td class="price">K ${item.price}</td>
+        <td class="quantity">
+            <div class="input-group mb-3">
+             <input type="number" name="quantity" class="quantity form-control input-number" value="${item.quantity}" min="1" max="100" onchange="updateQuantity('${item.id}', this.value)">
+            </div>
+        </td>
+        <td class="total">K ${total.toFixed(2)}</td>
+      `;
+      cartItemsContainer.appendChild(row);
+    });
+
+    const totalAmount = subtotal + deliveryCharge;
+    
+    cartSubtotal.innerText = `K ${subtotal.toFixed(2)}`;
+    deliveryChargeElem.innerText = `K ${deliveryCharge.toFixed(2)}`;
+    // discountAmountElem.innerText = `K ${discount.toFixed(2)}`;
+    cartTotal.innerText = `K ${totalAmount.toFixed(2)}`;
+  });
+
+  function removeFromCart(id) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart = cart.filter(item => item.id !== id);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    location.reload(); // Reload page to reflect changes
+  }
+
+  function updateQuantity(id, quantity) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart = cart.map(item => {
+      if (item.id === id) {
+        item.quantity = parseInt(quantity);
+      }
       
+      return item;
+    });
+    localStorage.setItem('cart', JSON.stringify(cart));
+    location.reload(); // Reload page to reflect changes
+  }
+</script>

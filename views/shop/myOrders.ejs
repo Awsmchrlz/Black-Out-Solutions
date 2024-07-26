@@ -1,0 +1,148 @@
+<div class="hero-wrap hero-bread" style="background-image: url('/images/bg_6.jpg');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span> <span>Orders</span></p>
+                <h1 class="mb-0 bread">My Orders</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 ftco-animate">
+                <% if (orders.length > 0) { %>
+                    <% orders.forEach(order => { %>
+                        <div class="order-card">
+                            <h3>Order placed on <%= order.orderDate.toLocaleDateString() %></h3>
+                            <div class="table-responsive">
+                                <table class="table order-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Item</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% order.items.forEach(item => { %>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="<%= item.productImage %>" alt="<%= item.name %>" class="item-img">
+                                                        <span><%= item.name %></span>
+                                                    </div>
+                                                </td>
+                                                <td><%= item.quantity %></td>
+                                                <td>K<%= item.price %></td>
+                                                <td>K<%= item.price * item.quantity %></td>
+                                            </tr>
+                                        <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p><strong>Total: K<%= order.total %></strong></p>
+                            <p>Status: <%= order.status %></p>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>You have no orders yet.</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.hero-wrap.hero-bread {
+    background-size: cover;
+    background-position: center center;
+    height: 300px;
+    position: relative;
+}
+
+.hero-wrap.hero-bread .container {
+    position: relative;
+    z-index: 2;
+}
+
+.order-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+.order-card h3 {
+    margin-bottom: 15px;
+}
+
+.order-card img.item-img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.order-card .d-flex.align-items-center {
+    display: flex;
+    align-items: center;
+}
+
+.order-card .d-flex.align-items-center span {
+    display: inline-block;
+    word-wrap: break-word;
+}
+
+.order-card .table {
+    width: 100%;
+    table-layout: auto;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+
+.order-card th, .order-card td {
+    text-align: left;
+    vertical-align: middle;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.order-card th {
+    width: auto;
+}
+
+.order-card p {
+    margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+    .order-card img.item-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .order-card th, .order-card td {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 576px) {
+    .order-card img.item-img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .order-card th, .order-card td {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
+</style>
