@@ -8,6 +8,7 @@ const Order = require('../models/orderSchema.js');
 const { ensureAuthenticated } = require('../config/auth');
 
 const Product = require('../models/uploadSchema'); 
+const {sendOrderEmail} = require('../utilities/gmailUtils')
 
 // router.get("/", ensureAuthenticated,(req, res) => {
 router.get("/", async (req, res) => {
@@ -170,8 +171,9 @@ router.post('/checkout', async (req, res) => {
       status: 'Pending',
       orderDate: new Date()
     });
-
+    
     await newOrder.save();
+    await sendOrderEmail(req.user,newOrder);
 
     res.redirect('/shop/orders');
   } catch (err) {

@@ -22,8 +22,9 @@ require('./config/passport')(passport);
 
 const localDb = "mongodb://127.0.0.1:27017/blackout"
 // Database connection
-
+// process.env.liveDb
 // process.env.
+
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.liveDb, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Database is connected'))
