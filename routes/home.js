@@ -43,4 +43,12 @@ const user = req.user;
 })
 
 
+router.get("/terms&conditions", (req,res) =>{
+    const user = req.user;
+    res.render("home/termsAndConditions",{
+      user
+    });
+})
+
+
 module.exports = router;
