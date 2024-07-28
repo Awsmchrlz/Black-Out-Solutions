@@ -31,10 +31,7 @@
                                         <% order.items.forEach(item => { %>
                                             <tr>
                                                 <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="<%= item.productImage %>" alt="<%= item.name %>" class="item-img">
-                                                        <span><%= item.name %></span>
-                                                    </div>
+                                                    solar panel
                                                 </td>
                                                 <td><%= item.quantity %></td>
                                                 <td>K<%= item.price %></td>
@@ -110,7 +107,7 @@
 .order-card th, .order-card td {
     text-align: left;
     vertical-align: middle;
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #e0e0e0;
 }
 
