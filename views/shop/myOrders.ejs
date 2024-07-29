@@ -41,8 +41,9 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <p><strong>Payment Method:<%= order.paymentMethod %></strong></p>
                             <p><strong>Total: K<%= order.total %></strong></p>
-                            <p>Status: <%= order.status %></p>
+                            <p><strong>Status: <%= order.status %></strong></p>
                         </div>
                     <% }) %>
                 <% } else { %>

@@ -20,11 +20,7 @@
         </div>
         <div class="col-lg-6 product-details pl-md-5 ftco-animate">
           <h3 data-name="<%=product.productName %>"><%=product.productName %></h3>
-          <div class="rating d-flex">
-            <p class="text-left">
-              <a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
-            </p>
-          </div>
+          
           <p class="price" data-price="<%=product.productPrice %>"><span>K <%=product.productPrice %></span></p>
           <p data-description="<%=product.productDescription %>"><%=product.productDescription %></p>
           <input type="hidden" data-image="<%=product.productImage %>">
@@ -32,7 +28,7 @@
           <div class="row mt-4">
             <div class="col-md-6">
               <div class="form-group d-flex">
-                <div class="select-wrap">
+                <!-- <div class="select-wrap">
                   <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                   <select name="" id="" class="form-control">
                     <option value="">Small</option>
@@ -40,19 +36,19 @@
                     <option value="">Large</option>
                     <option value="">Extra Large</option>
                   </select>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="w-100"></div>
             <div class="input-group col-md-6 d-flex mb-3">
                 <span class="input-group-btn mr-2">
-                    <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                    <button type="button" id="minusButton" class="quantity-left-minus btn" data-type="minus" data-field="">
                         <i class="ion-ios-remove"></i>
                     </button>
                 </span>
-                <input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+                <input type="number" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
                 <span class="input-group-btn ml-2">
-                    <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                    <button type="button" id="plusButton" class="quantity-right-plus btn" data-type="plus" data-field="">
                         <i class="ion-ios-add"></i>
                     </button>
                 </span>
@@ -65,7 +61,7 @@
           </div>
           <p>
             <a href="#" class="btn btn-black py-3 px-5 mr-2" id="addToCartBtn" data-id="<%=product._id %>" onclick="addToCart(event)">Add to Cart</a>
-            <a href="/shop/checkout" class="btn btn-primary py-3 px-5" onclick="buyNow(event)">Buy now</a>
+            <a href="/shop/checkout" class="btn btn-primary py-3 px-5" id="buyNowBtn" data-id="<%=product._id %>"  onclick="buyNow(event)">Buy now</a>
           </p>
         </div>
       </div>
@@ -73,9 +69,9 @@
       <div class="row mt-5">
         <div class="col-md-12 nav-link-wrap">
           <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link ftco-animate active mr-lg-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Description</a>
             <a class="nav-link ftco-animate mr-lg-1" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Manufacturer</a>
-            <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Reviews</a>
+            <a class="nav-link ftco-animate active mr-lg-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Description</a>
+            <!-- <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Reviews</a> -->
           </div>
         </div>
         <div class="col-md-12 tab-wrap">
@@ -83,87 +79,39 @@
             <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
               <div class="p-4">
                 <h3><%=product.productName %></h3>
+                <h3 class="mb-4"><%=product.productCompanyName %></h3>
                 <p><%= product.productDescription %></p>
               </div>
             </div>
   
             <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-day-2-tab">
               <div class="p-4">
+                <h3><%=product.productName %></h3>
                 <h3 class="mb-4"><%=product.productCompanyName %></h3>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam nesciunt odit id unde commodi asperiores vitae vero quia, alias explicabo.</p>
               </div>
             </div>
   
-            <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-day-3-tab">
-              <div class="row p-4">
-                <div class="col-md-7">
-                  <h3 class="mb-4">23 Reviews</h3>
-                  <div class="review">
-                    <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
-                    <div class="desc">
-                      <h4>
-                        <span class="text-left">Jacob Webb</span>
-                        <span class="text-right">14 March 2018</span>
-                      </h4>
-                      <p class="star">
-                        <span>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                        </span>
-                        <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-                      </p>
-                      <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-                    </div>
-                  </div>
-                  <div class="review">
-                    <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
-                    <div class="desc">
-                      <h4>
-                        <span class="text-left">Jacob Webb</span>
-                        <span class="text-right">14 March 2018</span>
-                      </h4>
-                      <p class="star">
-                        <span>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                        </span>
-                        <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-                      </p>
-                      <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-                    </div>
-                  </div>
-                  <div class="review">
-                    <div class="user-img" style="background-image: url(images/person_3.jpg)"></div>
-                    <div class="desc">
-                      <h4>
-                        <span class="text-left">Jacob Webb</span>
-                        <span class="text-right">14 March 2018</span>
-                      </h4>
-                      <p class="star">
-                        <span>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                        </span>
-                        <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-                      </p>
-                      <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
           </div>
         </div>
       </div>
     </div>
   </section>
   
+  <script>
+    
+  const plusButton = document.getElementById('plusButton');
+  const minusButton = document.getElementById('minusButton');
+
+  const qtyContainer = document.getElementById('quantity')
+
+  plusButton.addEventListener('click',()=>{
+    qtyContainer.value = parseInt(qtyContainer.value)+1
+  })
+
+  minusButton.addEventListener('click',()=>{
+    if(qtyContainer.value>1){
+      qtyContainer.value = parseInt(qtyContainer.value)-1
+    }
+  })
+  </script>

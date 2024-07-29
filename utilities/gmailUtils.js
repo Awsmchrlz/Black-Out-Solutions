@@ -731,6 +731,219 @@ function generatePasswordAttemptsAlert({ ipAddress }) {
 `
 }
 
+
+const generateOrderEmail = (
+  user, 
+order) => {
+  return `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <title>Order Confirmation</title>
+      <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f8f9fa;
+        }
+        .container {
+          background-color: #ffffff;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          padding: 40px;
+          margin: 20px;
+        }
+        .header {
+          background-color: #007bff;
+          color: white;
+          padding: 10px;
+          border-radius: 10px 10px 0 0;
+        }
+        .footer {
+          background-color: #f1f1f1;
+          padding: 10px;
+          text-align: center;
+          border-radius: 0 0 10px 10px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h2>Order Confirmation</h2>
+        </div>
+        <p>Hi ${user.firstName} ${user.lastName},</p>
+        <p>Thank you for your order! Here are your order details:</p>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${order.items.map(item => `
+              <tr>
+                <td>${item.name}</td>
+                <td>${item.quantity}</td>
+                <td>${item.price}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+        <p><strong>Payment Method:</strong> ${order.paymentMethod}</p>
+        <p><strong>Total:</strong> K${order.total.toFixed(2)}</p>
+        <p><strong>Status:</strong> ${order.status}</p>
+        <p><strong>Order Date:</strong> ${new Date(order.orderDate).toLocaleDateString()}</p>
+        <p>We will contact you on <strong>${user.phoneNumber}</strong> or <p><strong>${user.email}</strong> you once your order is shipped.</p>
+        <div class="footer">
+          <p>Thank you for shopping with us!</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+};
+
+
+const generateAdminOrderEmail = (
+  user, order) => {
+  return `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <title>New Order Notification</title>
+      <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f8f9fa;
+        }
+        .container {
+          background-color: #ffffff;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          padding: 40px;
+          margin: 20px;
+        }
+        .header {
+          background-color: #dc3545;
+          color: white;
+          padding: 10px;
+          border-radius: 10px 10px 0 0;
+        }
+        .footer {
+          background-color: #f1f1f1;
+          padding: 10px;
+          text-align: center;
+          border-radius: 0 0 10px 10px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h2>New Order Notification</h2>
+        </div>
+        <p>A new order has been placed with the following details:</p>
+        <h5>Customer Information</h5>
+        <p><strong>Name:</strong> ${user.firstName} ${user.lastName}</p>
+        <p><strong>Email:</strong> ${user.email}</p>
+        <p><strong>Phone Number:</strong> ${user.phoneNumber}</p>
+        <h5>Order Details</h5>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${order.items.map(item => `
+              <tr>
+                <td>${item.name}</td>
+                <td>${item.quantity}</td>
+                <td>${item.price}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+        <p><strong>Payment Method:</strong> ${order.paymentMethod}</p>
+        <p><strong>Total:</strong> K${order.total.toFixed(2)}</p>
+        <p><strong>Status:</strong> ${order.status}</p>
+        <p><strong>Order Date:</strong> ${new Date(order.orderDate).toLocaleDateString()}</p>
+        <div class="footer">
+          <p>Please process the order as soon as possible.</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+};
+
+
+
+
+function sendOrderEmail(user, order) {
+  apiInstance
+    .sendTransacEmail({
+      sender: { email: `${user.email}`, name: user.firstName },
+      subject: "Blackout Energy Solutions Order",
+      htmlContent: `<html>
+          <head></head>
+          <body></body>
+          </html>
+          `,
+      messageVersions: [
+        //Definition for Message Version 1
+        
+        {
+          to: [
+            {
+              email: user.email,
+              name: `${user.firstName} ${user.lastName}`,
+            },
+          ],
+          htmlContent: generateOrderEmail(user,order),
+          subject: "Order Recieved! ~ Blackout Energy Solutions",
+        },
+        {
+          to: [
+            {
+        
+              email:'Kaumbunyongi2@gmail.com',
+              // email:'chisalecharles23@gmail.com',
+              name: `${user.firstName} ${user.lastName}`,
+            },
+          ],
+          htmlContent: generateAdminOrderEmail(user,order),
+          subject: "New Order Recieved! ~ Blackout Energy Solutions",
+        },
+      ],
+    })
+    .then(
+      function (data) {
+        //console.log(data);
+      },
+      function (error) {
+        console.error(error);
+      }
+    );
+}
+
+
+
+
 module.exports = {
   sendEmail,
   sendAccountCreateEmail,
@@ -739,5 +952,6 @@ module.exports = {
   sendForgotPasswordEmail,
   generateTokenHTML,
   sendTokenEmail,
-  sendExceededLoginEmail
+  sendExceededLoginEmail,
+  sendOrderEmail
 };
