@@ -800,7 +800,7 @@ order) => {
         <p><strong>Total:</strong> K${order.total.toFixed(2)}</p>
         <p><strong>Status:</strong> ${order.status}</p>
         <p><strong>Order Date:</strong> ${new Date(order.orderDate).toLocaleDateString()}</p>
-        <p>We will notify you once your order is shipped.</p>
+        <p>We will contact you on <strong>${user.phoneNumber}</strong> or <p><strong>${user.email}</strong> you once your order is shipped.</p>
         <div class="footer">
           <p>Thank you for shopping with us!</p>
         </div>
@@ -858,6 +858,7 @@ const generateAdminOrderEmail = (
         <h5>Customer Information</h5>
         <p><strong>Name:</strong> ${user.firstName} ${user.lastName}</p>
         <p><strong>Email:</strong> ${user.email}</p>
+        <p><strong>Phone Number:</strong> ${user.phoneNumber}</p>
         <h5>Order Details</h5>
         <table class="table">
           <thead class="thead-dark">

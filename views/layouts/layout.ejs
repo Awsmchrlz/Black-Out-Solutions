@@ -194,7 +194,7 @@ border:none;
 </head>
 <body class="goto-here">
 
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <nav class="navbar navbar-expand-lg navbar-light ftco_navbar ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
 	      <a class="navbar-brand" href="/">
           <div class="sidebar-logo">
@@ -203,12 +203,12 @@ border:none;
         </a>
         <!-- <a href="">Search</a> -->
         <span id="searchBar" type="button" class="scrollToTop" data-toggle="collapse" data-target="#search-bar" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-          <!-- <i class="fa fa-search"></i> -->
-          <i>Search</i>
+          <i class="fa fa-search"></i>
+          <!-- <i>Search</i> -->
         </span>
         
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
+	        <span class="oi oi-menu"></span> 
 	      </button>
 
 	      <div class="container collapse navbar-collapse" id="ftco-nav">
@@ -224,7 +224,7 @@ border:none;
             </li>
 	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta cta-colored"><a href="/shop/cart" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+	          <li class="nav-item cta cta-colored"><a href="/shop/cart" class="nav-link"><span class="icon-shopping_cart"></span><span id="cartCounter">[0]</span></a></li>
           <%if(!user){%>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sign up</a>

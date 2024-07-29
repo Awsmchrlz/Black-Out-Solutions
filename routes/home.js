@@ -21,7 +21,6 @@ router.get("/", async (req, res) => {
 router.get("/manageAccount", (req, res) => {
   const user = req.user
   res.render("auth/manageAccount",{
-      layout: "layouts/non_header_layout",
         user,
         message:''
   });

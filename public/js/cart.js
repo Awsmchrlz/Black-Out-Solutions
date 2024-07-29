@@ -1,8 +1,11 @@
 
    document.addEventListener('DOMContentLoaded', function() {
+    
     const cart = JSON.parse(localStorage.getItem('cart')) || {};
     const cartTableBody = document.querySelector('.cart-list tbody');
-
+    const cartCounter = document.getElementById('cartCounter')
+    cartCounter.innerHTML = `[${cart.length}]`
+  
     let subtotal = 0;
     let delivery = 0; // Default delivery charge
 

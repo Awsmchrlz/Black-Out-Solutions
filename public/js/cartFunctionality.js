@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const buyNowBtn = document.getElementById('buyNowBtn');
   const productId = addToCartBtn.dataset.id;
   const quantityInput = document.getElementById('quantity');
-
+  
   function checkCart() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     return cart.find(item => item.id === productId);
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
       addToCartBtn.href = '/shop/cart';
       quantityInput.value = cartItem.quantity; // Set quantity to saved value
       addToCartBtn.removeEventListener('click', addToCart);
+   
     } else {
       addToCartBtn.textContent = 'Add to Cart';
       addToCartBtn.href = '#';
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function addToCart(event) {
     event.preventDefault();
+   
     const productName = document.querySelector('[data-name]').dataset.name;
     const productPrice = document.querySelector('[data-price]').dataset.price;
     const productImage = document.querySelector('[data-image]').dataset.image;
@@ -50,6 +52,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
+    const cartCounter = document.getElementById('cartCounter')
+  const crt = JSON.parse(localStorage.getItem('cart')) || [];
+  cartCounter.innerHTML = `[${crt.length}]`
+
     updateButton();
   }
 
@@ -99,4 +105,5 @@ document.addEventListener('DOMContentLoaded', function() {
   addToCartBtn.addEventListener('click', addToCart);
   buyNowBtn.addEventListener('click', buyNow);
   updateButton();
+
 });
