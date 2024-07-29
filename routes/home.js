@@ -9,7 +9,7 @@ const Product = require('../models/uploadSchema');
 router.get("/", async (req, res) => {
   // console.log(req.user)
 
-  const products = await Product.find({});
+  const products = await Product.find({}).sort({ createdAt: -1 }).limit(4);
   
   const user = req.user
     res.render("home/home",{

@@ -10765,7 +10765,12 @@ textarea.form-control {
   color:black !important;
 }
 
+<<<<<<< HEAD
 nav a.nav-link{
   color:black !important;
 
+=======
+.icon img{
+   width: 70px;
+>>>>>>> f00081454cbeb413c078301061dffb2b41731725
 }
