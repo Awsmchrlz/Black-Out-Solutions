@@ -9112,7 +9112,7 @@ h1, h2, h3, h4, h5,
     padding: 35px 30px !important;
     border-radius: 0;
     margin-bottom: 0;
-    color: #000000;
+    color: #000000 !important;
     font-size: 22px;
     font-weight: 700;
     position: relative;
@@ -9136,7 +9136,9 @@ h1, h2, h3, h4, h5,
       border-style: solid;
       border-width: 10px 10px 0 10px;
       border-color: #000000 transparent transparent transparent;
-      opacity: 0; }
+      opacity: 0;
+      color: black !important;
+    }
     .nav-pills .nav-link span {
       display: block;
       font-size: 14px; }
@@ -10763,6 +10765,12 @@ textarea.form-control {
   color:black !important;
 }
 
+<<<<<<< HEAD
+nav a.nav-link{
+  color:black !important;
+
+=======
 .icon img{
    width: 70px;
+>>>>>>> f00081454cbeb413c078301061dffb2b41731725
 }
