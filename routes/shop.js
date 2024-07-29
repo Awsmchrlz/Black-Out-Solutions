@@ -186,7 +186,7 @@ router.post('/checkout', async (req, res) => {
 // View user orders
 router.get('/orders', async (req, res) => {
   try {
-      const orders = await Order.find({ user: req.user._id }).populate('user');
+      const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 }).populate('user');
       res.render('shop/myOrders', { orders: orders,user:req.user });
   } catch (err) {
       console.error(err);
