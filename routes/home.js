@@ -49,5 +49,19 @@ router.get("/terms&conditions", (req,res) =>{
     });
 })
 
+router.get("/expertSystem", (req,res) =>{
+  const user = req.user;
+  res.render("home/expertSystem",{
+    user
+  });
+})
+
+router.get("/loadManagement", (req,res) =>{
+  const user = req.user;
+  res.render("home/loadManagement",{
+    user
+  });
+})
+
 
 module.exports = router;
